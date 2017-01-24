@@ -30,7 +30,7 @@ namespace Capl.Services.Configuration
         public abstract string Name { get; }
         public virtual void SetProperty(string name, string value)
         {
-            base[name] = value;
+            base.SetPropertyValue(new ConfigurationProperty(name, typeof(string)), value, true);
         }
     }
 }

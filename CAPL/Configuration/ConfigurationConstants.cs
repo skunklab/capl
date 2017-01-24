@@ -26,7 +26,6 @@ namespace Capl.Configuration
     {   
             public const string IdentityModelSection = "capl";
             public const string AuthorizationSection = "capl/authorization";
-            public const string ManagementSection = "capl/management";
             public const string ExtensionsSection = "capl/extensions";
     }
 }

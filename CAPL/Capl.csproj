@@ -76,7 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\BlobStoreElement.cs" />
-    <Compile Include="Configuration\ManagementSection.cs" />
     <Compile Include="Configuration\PolicyCacheElement.cs" />
     <Compile Include="Configuration\PolicyStoreElement.cs" />
     <Compile Include="Configuration\RedisCacheElement.cs" />
