@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{06A06F9A-8F99-437D-AD8C-7B17B95A328F}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\CAPL.1.1.1.nupkg = NuGet\CAPL.1.1.1.nupkg
+		NuGet\CAPL.1.1.1.nuspec = NuGet\CAPL.1.1.1.nuspec
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capl", "CAPL\Capl.csproj", "{F967630C-DC89-4433-A732-833E9815EB1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F967630C-DC89-4433-A732-833E9815EB1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F967630C-DC89-4433-A732-833E9815EB1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F967630C-DC89-4433-A732-833E9815EB1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F967630C-DC89-4433-A732-833E9815EB1E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

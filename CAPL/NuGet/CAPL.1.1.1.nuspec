@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>CAPL</id>
+        <version>1.1.1</version>
+        <title>Claims Authorization Policy Language</title>
+        <authors>w.matt.long@outlook.com</authors>
+        <owners>w.matt.long@outlook.com</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Enables distributed access control through a policy language implemented by local resources.  Security token agnostic and allows simple or complex expressions, including logical connectives and nested.  Extensible framework for expression operations, matching claims, and transforms.  Also, includ CIPL, a language for issuing claims for security tokens.</description>
+        <summary>Security token agnostic access control language for distributed access control.</summary>
+        <copyright>2007</copyright>
+        <language>en-US</language>
+        <tags>CAPL "Access Control" Authorization Claims "Distributed Access Control" "Distributed Authorization"</tags>
+        <frameworkAssemblies>
+            <frameworkAssembly assemblyName="System" targetFramework=".NETFramework4.5.1" />
+            <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.5.1" />
+            <frameworkAssembly assemblyName="System.Configuration" targetFramework=".NETFramework4.5.1" />
+            <frameworkAssembly assemblyName="System.Core" targetFramework=".NETFramework4.5.1" />
+            <frameworkAssembly assemblyName="System.Runtime.Serialization" targetFramework=".NETFramework4.5.1" />
+            <frameworkAssembly assemblyName="System.Web" targetFramework=".NETFramework4.5.1" />
+            <frameworkAssembly assemblyName="System.Xml" targetFramework=".NETFramework4.5.1" />
+            <frameworkAssembly assemblyName="System.Xml.Linq" targetFramework=".NETFramework4.5.1" />
+        </frameworkAssemblies>
+        <dependencies>
+          <dependency id="Newtonsoft.Json" version="9.0.1" />
+          <dependency id="EntityFramework" version="6.1.0" />
+          <dependency id="WindowsAzure.Storage" version="7.2.1" />
+          <dependency id="Microsoft.Azure.KeyVault.Core" version="1.0.0" />
+          <dependency id="System.Spatial" version="5.7.0" />
+          <dependency id="Microsoft.Data.OData" version="5.7.0" />
+          <dependency id="StackExchange.Redis" version="1.1.606" />
+          <dependency id="Microsoft.Data.Edm" version="5.7.0" />
+          <dependency id="Microsoft.Data.Services.Client" version="5.7.0" />          
+       </dependencies>
+
+    </metadata>
+ 
+    <files>
+        <file src="..\bin\Release\Capl.dll" target="lib\net451\Capl.dll" />
+    </files>
+</package>
