@@ -9,7 +9,7 @@ specification: http://www.authz.org
 ```
 Introduction
 --------
-Claims Authorization Policy Language (CAPL) is a security token agnostic, serializable, logic and claims-based language for distributed authorization.  CAPL allows an author to create simple or complex expressions that make authorization decisions and distribute those policies to applications.  Applications use the policies to make authorization decisions in the context of the application.  CAPL policies are designed to be simple for applications to use and execute very quickly.
+Claims Authorization Policy Language (CAPL) is a security token agnostic, serializable, logic and claims-based language for distributed authorization.  CAPL allows an author to create simple or complex expressions that make authorization decisions and distribute those policies to applications.  Applications use the policies to make authorization decisions in the context of the application.  
 
 CAPL was designed with the following parameters:
 
