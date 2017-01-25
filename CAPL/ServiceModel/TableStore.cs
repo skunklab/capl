@@ -9,6 +9,7 @@ namespace Capl.ServiceModel
     using Capl.Authorization;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Table;
+    using System;
     using System.Globalization;
     using System.IO;
     using System.Linq;
@@ -48,8 +49,11 @@ namespace Capl.ServiceModel
 
         public AuthorizationPolicy GetPolicy(string policyId)
         {
+            Uri policyUri = new Uri(policyId);
+            string policyUriString = policyUri.ToString().ToLower(CultureInfo.InvariantCulture);
+
             AuthorizationPolicy policy = null;
-            TableQuery<PolicyEntity> query = new TableQuery<PolicyEntity>().Where(TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, policyId));
+            TableQuery<PolicyEntity> query = new TableQuery<PolicyEntity>().Where(TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, policyUriString));
             TableQuerySegment<PolicyEntity> segment = table.ExecuteQuerySegmented<PolicyEntity>(query, new TableContinuationToken());
 
             if (segment == null || segment.Results.Count == 0)
@@ -76,7 +80,8 @@ namespace Capl.ServiceModel
         }
 
         public void SetPolicy(AuthorizationPolicy policy)
-        {
+        {           
+
             XmlWriterSettings settings = new XmlWriterSettings() { OmitXmlDeclaration = true};
             StringBuilder builder = new StringBuilder();
             using(XmlWriter writer = XmlWriter.Create(builder, settings))
@@ -95,6 +100,26 @@ namespace Capl.ServiceModel
                 });
 
             Task.WhenAll(task);
+        }
+
+        public bool RemovePolicy(string policyId)
+        {
+            Uri policyUri = new Uri(policyId);
+            string policyUriString = policyUri.ToString().ToLower(CultureInfo.InvariantCulture);
+
+            TableQuery<PolicyEntity> query = new TableQuery<PolicyEntity>().Where(TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, policyId));
+            TableQuerySegment<PolicyEntity> segment = table.ExecuteQuerySegmented<PolicyEntity>(query, new TableContinuationToken());
+
+            if (segment == null || segment.Results.Count == 0)
+            {
+                return false;
+            }
+            else
+            {                
+                PolicyEntity entity = segment.First();
+                TableResult result = table.Execute(TableOperation.Delete(entity));
+                return (result.HttpStatusCode == 200 || result.HttpStatusCode == 202 || result.HttpStatusCode == 204);
+            }
         }
 
     }

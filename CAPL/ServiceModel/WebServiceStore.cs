@@ -165,5 +165,67 @@ namespace Capl.ServiceModel
                 throw;
             }
         }
+
+        public bool RemovePolicy(string policyId)
+        {
+            HttpWebRequest request = null;
+
+            try
+            {
+                string url = null;
+                Uri uri = new Uri(ServiceUrl);
+
+                if (uri.Query == null)
+                {
+                    url = String.Format("{0}?policyid={1}", this.ServiceUrl.ToString(), policyId);
+                }
+                else
+                {
+                    url = String.Format("{0}&policyid={1}", this.ServiceUrl.ToString(), policyId);
+                }
+
+                request = HttpWebRequest.Create(url) as HttpWebRequest;
+                request.ContentType = "application/xml";
+                request.Accept = "application/xml";
+                request.Method = "DELETE";
+
+                if (!string.IsNullOrEmpty(this.SecurityToken))
+                {
+                    request.Headers.Add("Authorization", String.Format("Bearer {0}", this.SecurityToken));
+                }
+
+                if (this.Certificate != null)
+                {
+                    request.ClientCertificates.Add(this.Certificate);
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                throw;
+            }
+
+            try
+            {
+                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+                {
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        Trace.TraceInformation("Rest request is success.");
+                        return true;
+                    }
+                    else
+                    {
+                        Trace.TraceInformation("Rest request return an unexpected status code.");
+                        return false;
+                    }
+                }
+            }
+            catch (WebException we)
+            {
+                Trace.TraceError(we.Message);
+                throw;
+            }
+        }
     }
 }

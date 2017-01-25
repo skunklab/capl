@@ -15,6 +15,8 @@ namespace Capl.ServiceModel
 
         void SetPolicy(AuthorizationPolicy policy);
 
+        bool RemovePolicy(string policyId);
+
 
     }
 }

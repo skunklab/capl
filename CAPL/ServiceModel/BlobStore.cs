@@ -104,6 +104,17 @@ namespace Capl.ServiceModel
             Task.WhenAll(task);
         }
 
+        public bool RemovePolicy(string policyId)
+        {
+            Uri policyUri = new Uri(policyId);
+            string policyUriString = policyUri.ToString().ToLower(CultureInfo.InvariantCulture);
+
+            string filename = GetFilename(policyUriString);
+
+            CloudBlockBlob blockBlob = blobContainer.GetBlockBlobReference(filename);
+            return blockBlob.DeleteIfExists();
+        }
+
         private string GetFilename(string policyUriString)
         {
             byte[] hash = null;
