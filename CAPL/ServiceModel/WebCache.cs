@@ -7,6 +7,7 @@ MIT License
 
 using Capl.Authorization;
 using System;
+using System.Globalization;
 using System.Web;
 using System.Web.Caching;
 
@@ -31,6 +32,11 @@ namespace Capl.ServiceModel
 
         public void Set(string key, AuthorizationPolicy policy)
         {
+            if(HttpRuntime.Cache.Get(key) != null)
+            {
+                HttpRuntime.Cache.Remove(key);
+            }
+
             HttpRuntime.Cache.Add(key, policy, null, DateTime.Now.Add(DefaultTTL), Cache.NoSlidingExpiration, CacheItemPriority.High, null);
         }
 
@@ -39,13 +45,18 @@ namespace Capl.ServiceModel
             HttpRuntime.Cache.Add(key, policy, null, DateTime.Now.Add(ttl), Cache.NoSlidingExpiration, CacheItemPriority.High, null);            
         }
 
-        public void Remove(string key)
+        public bool Remove(string key)
         {
             AuthorizationPolicy policy = Get(key);
 
             if(policy != null)
             {
                 HttpRuntime.Cache.Remove(key);
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

@@ -16,7 +16,7 @@ namespace Capl.ServiceModel
         void Set(string key, AuthorizationPolicy policy, TimeSpan ttl);
 
         void Set(string key, AuthorizationPolicy policy);
-        void Remove(string key);
+        bool Remove(string key);
 
     }
 }

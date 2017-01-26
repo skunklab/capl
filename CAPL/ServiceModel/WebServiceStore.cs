@@ -40,7 +40,7 @@ namespace Capl.ServiceModel
             {
                 string url = null;
                 Uri uri = new Uri(ServiceUrl);
-                if (uri.Query == null)
+                if (string.IsNullOrEmpty(uri.Query))
                 {
                     url = String.Format("{0}?policyid={1}", this.ServiceUrl.ToString(), policyId);
                 }
@@ -149,7 +149,7 @@ namespace Capl.ServiceModel
             {
                 using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
                 {
-                    if (response.StatusCode == HttpStatusCode.Accepted)
+                    if (response.StatusCode == HttpStatusCode.Accepted || response.StatusCode == HttpStatusCode.OK)
                     {
                         Trace.TraceInformation("Rest request is success.");
                     }

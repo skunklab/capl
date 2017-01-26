@@ -45,9 +45,9 @@ namespace Capl.ServiceModel
             database.KeyExpire(key, ttl);
         }
 
-        public void Remove(string key)
+        public bool Remove(string key)
         {
-            database.KeyDelete(key);
+           return database.KeyDelete(key);
         }
 
         public void Set(string key, AuthorizationPolicy policy)

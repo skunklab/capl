@@ -7,6 +7,7 @@ MIT License
 
 using Capl.Authorization;
 using System;
+using System.Globalization;
 
 namespace Capl.ServiceModel
 {
@@ -62,6 +63,13 @@ namespace Capl.ServiceModel
             }
 
             return policy;
+        }
+
+        public bool RemovePolicy(string key)
+        {
+            string policyUriString = new Uri(key).ToString().ToLower(CultureInfo.InvariantCulture);
+            Cache.Remove(key);
+            return Store.RemovePolicy(key);
         }
            
     }

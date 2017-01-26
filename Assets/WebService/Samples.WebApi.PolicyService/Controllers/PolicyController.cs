@@ -13,15 +13,17 @@ namespace Samples.WebApi.PolicyService.Controllers
 {
     public class PolicyController : ApiController
     {
-        private ICaplStore blobStore;
-        private string blobContainerName = "AZURE_BLOB_CONTAINER";
-        private string blobConnectionString = "AZURE_BLOB_CONNECTION_STRING";
-
-
+        private ICaplCache webCache;
+        //private ICaplStore blobStore;
+        //private string blobContainerName = "AZURE_BLOB_CONTAINER_NAME"; //e.g., policies
+        //private string blobConnectionString = "AZURE_BLOB_CONNECTION_STRING";  //e.g., 
+        
         public PolicyController()
         {
-            blobStore = BlobStore.Create(blobContainerName, blobConnectionString);            
+            webCache = new WebCache() { DefaultTTL = TimeSpan.FromMinutes(10) };
+            //blobStore = BlobStore.Create(blobContainerName, blobConnectionString);            
         }
+
         /// <summary>
         /// Get a CAPL policy
         /// </summary>
@@ -32,7 +34,9 @@ namespace Samples.WebApi.PolicyService.Controllers
         {
             try
             {
-                AuthorizationPolicy policy = blobStore.GetPolicy(policyId.ToLower(CultureInfo.InvariantCulture));
+                string policyUriString = new Uri(policyId).ToString().ToLower(CultureInfo.InvariantCulture);
+                AuthorizationPolicy policy = webCache.Get(policyUriString);
+                //AuthorizationPolicy policy = blobStore.GetPolicy(policyId);
 
                 if(policy != null)
                 {
@@ -51,7 +55,7 @@ namespace Samples.WebApi.PolicyService.Controllers
         }
 
         /// <summary>
-        /// Add a CAPL policy
+        /// Add a CAPL policy; will overwrite (update) and existing CAPL policy
         /// </summary>
         /// <param name="policy"></param>
         /// <returns>c</returns>
@@ -60,35 +64,10 @@ namespace Samples.WebApi.PolicyService.Controllers
         {
             try
             {
-                blobStore.SetPolicy(policy);
+                string policyUriString = policy.PolicyId.ToString().ToLower(CultureInfo.InvariantCulture);
+                webCache.Set(policyUriString, policy);
+                //blobStore.SetPolicy(policy);
                 return new HttpResponseMessage(HttpStatusCode.OK);
-            }
-            catch(Exception ex)
-            {
-                Trace.TraceError(ex.Message);
-                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
-            }
-        }
-
-        /// <summary>
-        /// Update a CAPL policy
-        /// </summary>
-        /// <param name="policy"></param>
-        /// <returns></returns>
-        [HttpPut]
-        public HttpResponseMessage Put(AuthorizationPolicy policy)
-        {
-            try
-            {
-                AuthorizationPolicy storedPolicy = blobStore.GetPolicy(policy.PolicyId.ToString().ToLower(CultureInfo.InvariantCulture));
-                if(storedPolicy == null)
-                {
-                    return new HttpResponseMessage(HttpStatusCode.NotFound);
-                }
-                else
-                {
-                    blobStore.SetPolicy(policy);
-                }
             }
             catch(Exception ex)
             {
@@ -107,14 +86,18 @@ namespace Samples.WebApi.PolicyService.Controllers
         {
             try
             {
-                AuthorizationPolicy storedPolicy = blobStore.GetPolicy(policy.PolicyId.ToString().ToLower(CultureInfo.InvariantCulture));
-                if (storedPolicy == null)
+                string policyUriString = new Uri(policyId).ToString().ToLower(CultureInfo.InvariantCulture);
+                bool result = webCache.Remove(policyUriString);
+
+                //bool result = blobStore.RemovePolicy(policyId);
+
+                if (result)
                 {
-                    return new HttpResponseMessage(HttpStatusCode.NotFound);
+                    return new HttpResponseMessage(HttpStatusCode.OK);
                 }
                 else
                 {
-                    
+                    return new HttpResponseMessage(HttpStatusCode.InternalServerError);
                 }
             }
             catch(Exception ex)
@@ -122,10 +105,6 @@ namespace Samples.WebApi.PolicyService.Controllers
                 Trace.TraceError(ex.Message);
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
-
         }
-
-        
-
     }
 }

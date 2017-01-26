@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.CodeAccessPolicy", "..\..\Assets\CodeAccess\Samples.CodeAccessPolicy\Samples.CodeAccessPolicy.csproj", "{844FE035-7236-4628-B322-05E147B1F9D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.WebApi.PolicyService", "..\..\Assets\WebService\Samples.WebApi.PolicyService\Samples.WebApi.PolicyService.csproj", "{BCF037BA-D60D-41F9-B731-57B5294FA567}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capl", "..\..\CAPL\Capl.csproj", "{F967630C-DC89-4433-A732-833E9815EB1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.CodeAccess", "Samples.CodeAccess\Samples.CodeAccess.csproj", "{526798E9-BD3C-40DE-9F11-CC2F7F4AEAE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.CodeAccess.PolicyManager", "Samples.CodeAccess.PolicyManager\Samples.CodeAccess.PolicyManager.csproj", "{2F4480E7-5ED7-4E48-ADA8-5A8BAC774F08}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{844FE035-7236-4628-B322-05E147B1F9D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{844FE035-7236-4628-B322-05E147B1F9D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{844FE035-7236-4628-B322-05E147B1F9D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{844FE035-7236-4628-B322-05E147B1F9D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCF037BA-D60D-41F9-B731-57B5294FA567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCF037BA-D60D-41F9-B731-57B5294FA567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCF037BA-D60D-41F9-B731-57B5294FA567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCF037BA-D60D-41F9-B731-57B5294FA567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F967630C-DC89-4433-A732-833E9815EB1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F967630C-DC89-4433-A732-833E9815EB1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F967630C-DC89-4433-A732-833E9815EB1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F967630C-DC89-4433-A732-833E9815EB1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{526798E9-BD3C-40DE-9F11-CC2F7F4AEAE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{526798E9-BD3C-40DE-9F11-CC2F7F4AEAE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{526798E9-BD3C-40DE-9F11-CC2F7F4AEAE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{526798E9-BD3C-40DE-9F11-CC2F7F4AEAE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F4480E7-5ED7-4E48-ADA8-5A8BAC774F08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F4480E7-5ED7-4E48-ADA8-5A8BAC774F08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F4480E7-5ED7-4E48-ADA8-5A8BAC774F08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F4480E7-5ED7-4E48-ADA8-5A8BAC774F08}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
