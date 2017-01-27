@@ -28,25 +28,33 @@ namespace Samples.CodeAccess
             Console.WriteLine("Remember to set your CAPL policy with the Policy Manager App...");
             Console.ReadKey();
 
+            System.Diagnostics.Stopwatch s = new System.Diagnostics.Stopwatch();
+
             bool running = true;
             while (running)
             {
 
                 //access the method with Code Access Policy
-                long start = DateTime.Now.Ticks;
                 try
-                {                    
+                {
+                    s.Start();
                     AccessMethod();
-                    DateTime clock = DateTime.Now.Subtract(new TimeSpan(start));
-                    Console.Write("   {0} micro-secs", clock.Ticks / (TimeSpan.TicksPerMillisecond / 1000));
-                    Console.WriteLine();
+                    s.Stop();
+                    string timeString = GetTimeString(s.ElapsedTicks);
+                    Console.ForegroundColor = timeString.Contains("ms") ? ConsoleColor.White : ConsoleColor.Green;
+                    Console.WriteLine(timeString);
                 }
                 catch (UnauthorizedAccessException se)
                 {
-                    DateTime clock = DateTime.Now.Subtract(new TimeSpan(start));
+                    s.Stop();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("AccessMethod is {0} {1} micro-secs", se.Message, clock.Ticks / (TimeSpan.TicksPerMillisecond / 1000));
+                    string timeString = GetTimeString(s.ElapsedTicks);
+                    Console.WriteLine("Unauthorized: {0} ", timeString);
                     Console.ResetColor();
+                }
+                finally
+                {
+                    s.Reset();
                 }
                 
                 Thread.Sleep(250);
@@ -80,6 +88,26 @@ namespace Samples.CodeAccess
             Thread.CurrentPrincipal = principal;
         }
 
+
+        static string GetTimeString(long ticks)
+        {
+            double value = 0;
+            string unit = null;
+            long ms = ticks / 10000L;
+            TimeSpan ts = new TimeSpan(ticks);
+            if(ts.TotalMilliseconds > 1)
+            {
+                unit = "ms";
+                value = ts.TotalMilliseconds;
+            }
+            else
+            {
+                unit = "micro-secs";
+                value = ticks / (TimeSpan.TicksPerMillisecond / 1000);
+            }
+
+            return String.Format("    {0} {1}", value, unit);
+        }
         static void PrintHeader()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
